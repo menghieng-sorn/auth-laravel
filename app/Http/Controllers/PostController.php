@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -11,7 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('post.index');
+        $posts = Post::all();
+        // $posts = Post::where('user_id',Auth::user()->id)->get();
+        return view('post.index',compact('posts'));
     }
 
     /**
@@ -43,7 +48,14 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::find($id);
+        // if(! Gate::allows('update-post',$post)){
+        //     abort(403);
+        // }
+
+        // Gate::authorize('update-post',$post);
+        Gate::authorize('update',$post);
+        return view('post.edit',compact('post'));
     }
 
     /**
