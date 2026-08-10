@@ -27,6 +27,17 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 // Post route
- Route::resource('post', PostController::class)->middleware('auth');
-// Route::resource('post', PostController::class)->middleware('auth')->middleware('can:update');
-// Route::resource('post', PostController::class)->middleware(['auth','can:update']);
+// Route::resource('/post', PostController::class)->middleware('auth');
+// Route::resource('/post', PostController::class)->middleware('auth')->middleware('can:update');
+// Route::resource('/post', PostController::class)->middleware(['auth','can:update']);
+
+// Route::get('/post',function(){
+//     //return redirect()->route('post.create');
+//     return to_route('post.create');
+// })->name('post.index');
+// Route::get('/post/create', function () {
+//     return "Post Create";
+// })->name('post.create');
+
+Route::get('/post', [PostController::class,'index'])->name('post.index');
+Route::get('/post',[PostController::class,'create'])->name('post.create');

@@ -3,9 +3,9 @@
         {{-- @can('update',$post)
        <a href="{{ route('post.edit',$post->id) }}">{{ $post->title }}</a>
        @endcan --}}
-        @if(auth()->user()->can('update',$post))
+        {{-- @if(auth()->user()->can('update',$post))
        <a href="{{ route('post.edit',$post->id) }}">{{ $post->title }}</a>
-       @endif
+       @endif --}}
        <br>
    @endforeach
 </div>
