@@ -57,5 +57,14 @@ Route::post('/send-mail',function(Request $request){
     //     ->subject('Larabel Test mail');
     // });
 
-    Mail::to($request->email)->send(new SendMail($request->message));
+    //send table
+    //Mail::to($request->email)->send(new SendMail($request->message));
+
+    //Queqe
+    Mail::to($request->email)->queue(new SendMail($request->message));
+    dd("Email Send");
 })->name('send-mail');
+
+Route::get('components',function(){
+    return view('blade-component');
+});
